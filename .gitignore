@@ -1,0 +1,46 @@
+# Flutter
+.dart_tool/
+.packages
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+.melos_tool/
+.pub-cache/
+.svn/
+.idea/
+.metadata
+android/.gradle/
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/Flutter/App.framework
+ios/Flutter/engine/
+macos/Flutter/Flutter.framework
+macos/Flutter/App.framework
+macos/Flutter/engine/
+web/generated_plugin_registrant.dart
+
+# VS Code
+.vscode/
+
+# IntelliJ
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Xcode
+*.xcworkspace
+*.xcuserstate
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcworkspace/contents.xcworkspacedata
+DerivedData/
+
+# Others
+*.log
+*.lock
+*.DS_Store
+
+# Environment files
+.env
