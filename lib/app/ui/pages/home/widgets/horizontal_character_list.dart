@@ -2,11 +2,16 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/character_image.dart';
-import '../../../../controllers/character_controller.dart';
+import '../../../../data/model/character_model.dart';
 import 'package:starwars_characters_explorer_flutter/app/ui/pages/home/widgets/animated_character_card.dart';
 
 class HorizontalCharacterList extends StatefulWidget {
-  const HorizontalCharacterList({super.key});
+  final List<Character> characters;
+
+  const HorizontalCharacterList({
+    super.key,
+    required this.characters,
+  });
 
   @override
   State<HorizontalCharacterList> createState() =>
@@ -34,8 +39,6 @@ class _HorizontalCharacterListState extends State<HorizontalCharacterList> {
 
   @override
   Widget build(BuildContext context) {
-    final CharacterController controller = Get.find();
-
     return Stack(
       children: [
         Padding(
@@ -45,14 +48,19 @@ class _HorizontalCharacterListState extends State<HorizontalCharacterList> {
             child: ListView.builder(
               controller: scrollController,
               scrollDirection: Axis.horizontal,
-              itemCount: controller.characters.length,
+              itemCount: widget.characters.length,
               itemBuilder: (context, index) {
-                final character = controller.characters[index];
+                final character = widget.characters[index];
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: AnimatedCharacterCard(
-                    name: character.name,
-                    imagePath: getCharacterImage(character.name),
+                  child: GestureDetector(
+                    onTap: () {
+                      Get.toNamed('/details', arguments: character);
+                    },
+                    child: AnimatedCharacterCard(
+                      name: character.name,
+                      imagePath: getCharacterImage(character.name),
+                    ),
                   ),
                 );
               },

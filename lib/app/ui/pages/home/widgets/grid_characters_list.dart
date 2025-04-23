@@ -1,22 +1,26 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+
+import '../../../utils/character_image.dart';
+import '../../../../data/model/character_model.dart';
 import 'package:starwars_characters_explorer_flutter/app/ui/pages/home/widgets/animated_character_card.dart';
 
-// import 'character_card.dart';
-import '../../../utils/character_image.dart';
-import '../../../../controllers/character_controller.dart';
-
 class GridCharacterList extends StatelessWidget {
-  const GridCharacterList({super.key});
+  final List<Character> characters;
+
+  const GridCharacterList({
+    super.key,
+    required this.characters,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final CharacterController controller = Get.find();
+    // final CharacterController controller = Get.find();
 
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: GridView.builder(
-        itemCount: controller.characters.length,
+        itemCount: characters.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           crossAxisSpacing: 12,
@@ -24,10 +28,15 @@ class GridCharacterList extends StatelessWidget {
           childAspectRatio: 1.1,
         ),
         itemBuilder: (context, index) {
-          final character = controller.characters[index];
-          return AnimatedCharacterCard(
-            name: character.name,
-            imagePath: getCharacterImage(character.name),
+          final character = characters[index];
+          return GestureDetector(
+            onTap: () {
+              Get.toNamed('/details', arguments: character);
+            },
+            child: AnimatedCharacterCard(
+              name: character.name,
+              imagePath: getCharacterImage(character.name),
+            ),
           );
         },
       ),

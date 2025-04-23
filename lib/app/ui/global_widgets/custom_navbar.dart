@@ -1,7 +1,8 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
-import 'package:starwars_characters_explorer_flutter/app/ui/pages/home/widgets/custom_button.dart';
+import 'package:starwars_characters_explorer_flutter/app/data/model/character_model.dart';
+import 'package:starwars_characters_explorer_flutter/app/ui/global_widgets/custom_button.dart';
 
 class CustomNavbar extends StatelessWidget {
   const CustomNavbar({super.key});
@@ -14,8 +15,13 @@ class CustomNavbar extends StatelessWidget {
     //! Determino el título según la ruta
 
     String title = 'Star Wars Characters';
+
     if (currentRoute == '/favorites') {
       title = 'Favoritos';
+    }
+    if (Get.arguments != null && currentRoute == '/details') {
+      final Character character = Get.arguments;
+      title = '${character.name} Info';
     }
 
     return Container(
